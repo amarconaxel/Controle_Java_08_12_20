@@ -50,6 +50,31 @@ public class Supermarche {
 			this.listeCaisses.add(caisse);
 		}
 	}
+	
+	/**
+	 * Methode permettant de repartir les clients 
+	 * du supermarche dans les caisses présentes
+	 */
+	public void repartirClients() {
+		
+		Client head = this.fileGlobale.peek();
+		Caisse caisse;
+		boolean fin = false;
+		
+		while (!this.fileGlobale.isEmpty() || !fin) {
+			for (int i = 0; i < this.listeCaisses.size(); i++) {
+				head = this.fileGlobale.poll();
+				caisse = this.listeCaisses.get(i);
+				caisse.ajouterClient(head);
+				this.listeCaisses.set(i, caisse);
+				if (this.fileGlobale.isEmpty() || head.getDateArrivee() 
+						!= this.fileGlobale.peek().getDateArrivee()) {
+					fin = true;
+					break;
+				}
+			}
+		}
+	}
 
 	public ConcurrentLinkedQueue<Client> getFileGlobale() {
 		return fileGlobale;
