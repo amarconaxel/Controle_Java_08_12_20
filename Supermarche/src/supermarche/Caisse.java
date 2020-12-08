@@ -49,6 +49,20 @@ public class Caisse {
 			this.dureeTraitement += pClient.getDureeTraitement();
 		}
 	}
+	
+	/**
+	 * Fait passer les clients en caisse
+	 */
+	public void passerClients() {
+		while(!fileClients.isEmpty()) {
+			try {
+				Thread.sleep(this.fileClients.peek().getDureeTraitement() * 1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			this.dureeTraitement -= this.fileClients.poll().getDureeTraitement();
+		}
+	}
 
 	
 	public int getDureeTraitement() {

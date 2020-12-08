@@ -1,9 +1,13 @@
 package supermarche;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Classe de test pour l'ensemble du Projet Supermarche
+ * @author axel marcon
+ * @version 1.0
+ */
 class TestSupermarche {
 
 	@Test
@@ -68,6 +72,34 @@ class TestSupermarche {
 		supermarket.ajouterCaisses(caisses);
 		
 		supermarket.repartirClients();
+		
+	}
+	
+	@Test
+	void testPasserClients() {
+		Client[] clients = 
+			{ 
+				new Client(0, 2),
+				new Client(0, 2),
+				new Client(0, 2),
+				new Client(1, 2)
+			};
+		
+		Caisse[] caisses = 
+			{	new Caisse(new Caissiere(false)), 
+				new Caisse(new Caissiere(false))
+			};
+		
+		Supermarche supermarket = new Supermarche();
+		
+		supermarket.ajouterClients(clients);
+		supermarket.ajouterCaisses(caisses);
+		
+		supermarket.repartirClients();
+		
+		for(Caisse caisse : supermarket.getListeCaisses()) {
+			caisse.passerClients();
+		}
 	}
 
 }
