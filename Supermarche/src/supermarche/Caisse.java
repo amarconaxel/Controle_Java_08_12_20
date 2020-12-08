@@ -56,6 +56,7 @@ public class Caisse {
 	public void passerClients() {
 		while(!fileClients.isEmpty()) {
 			try {
+				//seulement pour tester
 				Thread.sleep(this.fileClients.peek().getDureeTraitement() * 1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
